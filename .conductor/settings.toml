@@ -5,7 +5,7 @@
 file_include_globs = [".env*", ".claude/settings.local.json"]
 
 [scripts]
-setup = "uv sync --locked --all-groups"
+setup = "bash .claude/routines/install-tools.sh"
 # Nothing here binds a port or shares a database, so workspaces can run at once.
 run_mode = "concurrent"
 
