@@ -7,7 +7,8 @@ argument-hint: "cascade <pr> | check <pr>"
 # Stack
 
 A stack is a chain of PRs in which each rung's base is the branch of the rung below. This
-skill moves its rungs the same way every time, for anyone: people and `/epic build`.
+skill moves its rungs the same way every time, for anyone: people, `/epic build` and the PR
+steward.
 
 `R` is `repos/transition-zero/tz-oss-interop`.
 
@@ -70,10 +71,9 @@ onto their parents, lowest first.
      4. `git push --force-with-lease=<branch>:<old head sha> origin <branch>`
    - **A rung ready for review** is never rebased. A rebase rewrites the commits a
      reviewer read, and detaches their resolved threads.
-     1. CodeRabbit must be paused on every rung that is ready for review, before the
-        push, because it reviews every push. If there is no "Reviews paused" reply on it yet, post
-        `@coderabbitai pause` and wait up to 3 minutes for the reply. If none comes,
-        push nothing and report it.
+     1. Pause CodeRabbit on the rung, as "Pause CodeRabbit" in the PR steward's
+        "GitHub" section says (`.claude/skills/pr-steward/SKILL.md`), with your own login.
+        If it never says `paused`, push nothing and report it.
      2. `git merge --no-edit origin/<parent branch>`, with no `-X` option. On a conflict,
         resolve each hunk by hand (below) and commit. If a hunk cannot keep both sides,
         run `git merge --abort`, stop the cascade, push nothing, and report the rung and
